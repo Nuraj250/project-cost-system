@@ -179,5 +179,4 @@ This project is open source and free to use for educational or commercial purpos
 
 ## 🙌 Author
 
-Developed by **\[Your Name]**
-🔗 GitHub: [https://github.com/Nuraj250](https://github.com/Nuraj250)
+Developed by **Nuraj250**
