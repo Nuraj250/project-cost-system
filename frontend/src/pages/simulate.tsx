@@ -99,8 +99,8 @@ export default function SimulatePage() {
                     Simulate Payment
                 </button>
 
-                {status === 'success' && <p className="text-green-400 mt-2">✅ Payment simulated!</p>}
-                {status === 'error' && <p className="text-red-400 mt-2">❌ Something went wrong.</p>}
+                {status === 'success' && <p className="text-green-400 mt-2"> Payment simulated!</p>}
+                {status === 'error' && <p className="text-red-400 mt-2"> Something went wrong.</p>}
             </form>
         </Layout>
     );
