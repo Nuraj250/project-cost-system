@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "office_expenses",
+  "info": {
+    "singularName": "office-expense",
+    "pluralName": "office-expenses",
+    "displayName": "OfficeExpense"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "monthlyCost": {
+      "type": "decimal"
+    }
+  }
+}

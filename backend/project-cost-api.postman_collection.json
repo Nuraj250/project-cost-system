@@ -1,0 +1,103 @@
+{
+  "info": {
+    "name": "Project Cost API",
+    "_postman_id": "uuid-here",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get Team Members",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:1337/api/team-members"
+        }
+      }
+    },
+    {
+      "name": "Create Team Member",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"data\": { \"name\": \"Alice\", \"monthlySalary\": 3000 } }"
+        },
+        "url": {
+          "raw": "http://localhost:1337/api/team-members"
+        }
+      }
+    },
+    {
+      "name": "Create Office Expense",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"data\": { \"title\": \"WiFi\", \"monthlyCost\": 150 } }"
+        },
+        "url": {
+          "raw": "http://localhost:1337/api/office-expenses"
+        }
+      }
+    },
+    {
+      "name": "Create Project",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"data\": { \"title\": \"CRM Revamp\", \"hours\": 100, \"team\": [1, 2] } }"
+        },
+        "url": {
+          "raw": "http://localhost:1337/api/projects"
+        }
+      }
+    },
+    {
+      "name": "Get Project Cost",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:1337/api/projects/1/cost"
+        }
+      }
+    },
+    {
+      "name": "Simulate Payment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"data\": { \"amount\": 1000, \"note\": \"Testing\", \"project\": 1, \"paymentStatus\": \"success\" } }"
+        },
+        "url": {
+          "raw": "http://localhost:1337/api/payments"
+        }
+      }
+    }
+  ]
+}
