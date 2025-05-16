@@ -6,10 +6,8 @@ import { useRouter } from 'next/router';
 
 interface TeamMember {
     id: number;
-    attributes: {
-        name: string;
-        monthlySalary: number;
-    };
+    name: string;
+    monthlySalary: number;
 }
 
 const ProjectForm: React.FC = () => {
@@ -17,12 +15,20 @@ const ProjectForm: React.FC = () => {
     const [hours, setHours] = useState<number>(0);
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
     const [selectedMembers, setSelectedMembers] = useState<number[]>([]);
+    const [loading, setLoading] = useState(true);
     const router = useRouter();
 
     useEffect(() => {
         const fetchTeam = async () => {
-            const res = await api.get('/team-members');
-            setTeamMembers(res.data.data);
+            try {
+                const res = await api.get('/team-members');
+                console.log(res.data.data)
+                setTeamMembers(res.data.data || []);
+            } catch (error) {
+                console.error('Failed to fetch team members');
+            } finally {
+                setLoading(false);
+            }
         };
         fetchTeam();
     }, []);
@@ -34,7 +40,7 @@ const ProjectForm: React.FC = () => {
                 data: {
                     title,
                     hours,
-                    team: selectedMembers,
+                    team_members: selectedMembers,
                 },
             });
             alert('Project created!');
@@ -49,6 +55,10 @@ const ProjectForm: React.FC = () => {
             prev.includes(id) ? prev.filter(m => m !== id) : [...prev, id]
         );
     };
+
+    if (loading) {
+        return <p className="text-center mt-10">Loading team members...</p>;
+    }
 
     return (
         <div className="max-w-2xl mx-auto bg-white/10 backdrop-blur-md rounded-2xl p-6 shadow-xl mt-10">
@@ -79,19 +89,24 @@ const ProjectForm: React.FC = () => {
                 <div>
                     <label className="block text-sm font-semibold mb-1">Select Team Members</label>
                     <div className="flex flex-wrap gap-2">
-                        {teamMembers.map((member) => (
-                            <button
-                                type="button"
-                                key={member.id}
-                                className={`px-4 py-2 rounded-full border ${selectedMembers.includes(member.id)
+                        {teamMembers.map((member) => {
+                            if (!member) return null;
+
+                            return (
+                                <button
+                                    type="button"
+                                    key={member.id}
+                                    className={`px-4 py-2 rounded-full border ${selectedMembers.includes(member.id)
                                         ? 'bg-blue-500 text-white border-blue-500'
                                         : 'bg-white/10 text-white border-white/20'
-                                    }`}
-                                onClick={() => toggleMember(member.id)}
-                            >
-                                {member.attributes.name}
-                            </button>
-                        ))}
+                                        }`}
+                                    onClick={() => toggleMember(member.id)}
+                                >
+                                    {member.name}
+                                </button>
+                            );
+                        })}
+
                     </div>
                 </div>
 

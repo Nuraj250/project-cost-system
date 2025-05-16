@@ -5,10 +5,8 @@ import Layout from '../components/Layout';
 
 interface Project {
     id: number;
-    attributes: {
         title: string;
         hours: number;
-    };
 }
 
 export default function Home() {
@@ -43,8 +41,8 @@ export default function Home() {
                         <ProjectCard
                             key={project.id}
                             id={project.id}
-                            title={project.attributes.title}
-                            hours={project.attributes.hours}
+                            title={project.title}
+                            hours={project.hours}
                         />
                     ))}
                 </div>
